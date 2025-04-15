@@ -65,7 +65,7 @@ export type State = {
     } catch (error) {
       // If a database error occurs, return a more specific error.
       if (error instanceof Error) {
-        return { message: `Database Error: ${error.message}` };
+        return { message: `Database Error: ${error instanceof Error ? error.message : 'Unknown error'}` };
       }
     }
    
