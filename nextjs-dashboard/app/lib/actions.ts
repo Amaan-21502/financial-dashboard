@@ -104,7 +104,7 @@ export async function updateInvoice(
       WHERE id = ${id}
     `;
   } catch (error) {
-    return { message: `Database Error: ${error.message}` };
+    return { message: `Database Error: ${error instanceof Error ? error.message : 'Unknown error'}` };
   }
  
   revalidatePath('/dashboard/invoices');
