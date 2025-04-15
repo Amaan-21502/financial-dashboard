@@ -64,9 +64,9 @@ export type State = {
       `;
     } catch (error) {
       // If a database error occurs, return a more specific error.
-      return {
-        message: 'Database Error: Failed to Create Invoice.',
-      };
+      if (error instanceof Error) {
+        return { message: `Database Error: ${error.message}` };
+      }
     }
    
     // Revalidate the cache for the invoices page and redirect the user.
@@ -104,7 +104,7 @@ export async function updateInvoice(
       WHERE id = ${id}
     `;
   } catch (error) {
-    return { message: 'Database Error: Failed to Update Invoice.' };
+    return { message: `Database Error: ${error.message}` };
   }
  
   revalidatePath('/dashboard/invoices');
